@@ -24,11 +24,18 @@ module.exports = function AutoLein(dispatch) {
 	dispatch.hook('S_BOSS_GAGE_INFO', 1, (event) => {
         bosses.add("" + event.id)
 	 })
-	
+	 
+	//HH Zone check
 	dispatch.hook('S_LOAD_TOPO', 1, event => {
 		if(event.zone == 9950) inHH = true
 		else inHH = false
 	})
+	
+	//Put a stop to shuradrunkie
+	 dispatch.hook('sAbnormalityBegin', 2, (event) => {
+    if(event.id == "70237" || event.id == "905434")
+        {return false;}
+      });
 	
 	dispatch.hook('S_START_COOLTIME_ITEM', 1, event => { 
 		let item = event.item
